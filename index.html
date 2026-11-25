@@ -1,207 +1,1113 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VangIoT 万联互联 · 物联网软件平台</title>
+<meta name="description" content="VangIoT 万联互联，面向工业与农业现场的物联网软件平台：设备接入、边缘采集、规则联动与数据看板。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23e4e9f2'/%3E%3Cpath d='M19 22 L32 45 L45 22' stroke='%232f6df6' stroke-width='7' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Nunito+Sans:wght@400;600;700;800&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap">
+<style>
+:root{
+  --bg:#e4e9f2;
+  --dark:#c4cad7;
+  --light:#ffffff;
+  --ink:#252c40;
+  --ink-2:#5b6580;
+  --ink-3:#8791a7;
+  --accent:#2f6df6;
+  --ok:#10a173;
+  --warn:#d98a26;
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  --raise:9px 9px 22px var(--dark), -9px -9px 22px var(--light);
+  --raise-sm:5px 5px 13px var(--dark), -5px -5px 13px var(--light);
+  --press:inset 6px 6px 14px var(--dark), inset -6px -6px 14px var(--light);
+  --press-sm:inset 3px 3px 7px var(--dark), inset -3px -3px 7px var(--light);
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+  --r-lg:34px;
+  --r-md:24px;
+  --r-sm:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Noto Sans SC","Nunito Sans","PingFang SC","Microsoft YaHei",sans-serif;
+  font-size:15.5px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{max-width:100%}
+h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.015em}
+p{margin:0}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:12px}
+.wrap{width:min(1180px,calc(100% - 44px));margin-inline:auto}
+#capability,#arch,#console,#protocol,#deploy,#scene,#path,#faq{scroll-margin-top:96px}
+.section{padding:80px 0}
+.section-head{max-width:640px;margin-bottom:44px}
+.section-head.is-center{text-align:center;margin-inline:auto}
+.section-head.is-center .kicker{justify-content:center}
+.section-head.is-center .sub{margin-inline:auto}
+.kicker{display:inline-flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-2);letter-spacing:.06em}
+.kicker i{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(47,109,246,.14)}
+.section-head h2{margin-top:14px;font-size:clamp(24px,2.9vw,36px);line-height:1.3}
+.section-head .sub{margin-top:14px;color:var(--ink-2);max-width:56ch}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 28px;border:0;border-radius:999px;
+  background:var(--bg);box-shadow:var(--raise-sm);
+  font-weight:600;cursor:pointer;
+  transition:box-shadow .28s ease, transform .28s ease, color .28s ease;
+}
+.btn:hover{box-shadow:var(--press-sm);transform:translateY(1px)}
+.btn:active{box-shadow:var(--press-sm)}
+.btn-primary{color:var(--accent)}
+.btn-lg{padding:18px 36px;font-size:16.5px}
+.btn-quiet{color:var(--ink-2)}
+.btn-quiet:hover{color:var(--ink)}
+.card{background:var(--bg);border-radius:var(--r-lg);box-shadow:var(--raise);padding:34px}
+.inset{background:var(--bg);border-radius:var(--r-md);box-shadow:var(--press)}
+.nav-wrap{position:sticky;top:0;z-index:60;background:var(--bg);padding:16px 0}
+.nav{
+  display:flex;align-items:center;gap:18px;
+  padding:11px 12px 11px 16px;border-radius:999px;
+  background:var(--bg);box-shadow:var(--raise-sm);
+  position:relative;
+}
+.brand{display:flex;align-items:center;gap:11px;padding-right:6px}
+.brand-mark{
+  width:42px;height:42px;border-radius:50%;
+  display:grid;place-items:center;
+  box-shadow:var(--raise-sm);background:var(--bg);flex:none;
+}
+.brand-word{display:flex;flex-direction:column;line-height:1.15}
+.brand-word b{font-size:16.5px;letter-spacing:-.01em}
+.brand-word span{font-size:11.5px;color:var(--ink-3);letter-spacing:.16em}
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+.nav-links{display:flex;gap:2px;margin-left:auto}
+.nav-links a{padding:9px 15px;border-radius:999px;font-size:14px;color:var(--ink-2);transition:box-shadow .28s,color .28s,background .28s}
+.nav-links a:hover,.nav-links a.is-current{box-shadow:var(--press-sm);color:var(--ink)}
+.nav-cta{padding:11px 22px;font-size:14px;font-weight:600;color:var(--accent)}
+.menu-btn{display:none;width:42px;height:42px;border:0;border-radius:50%;background:var(--bg);box-shadow:var(--raise-sm);cursor:pointer;margin-left:auto}
+.menu-btn svg{width:20px;height:20px}
+.mobile-menu{
+  display:none;position:absolute;top:calc(100% + 14px);left:0;right:0;
+  background:var(--bg);border-radius:var(--r-md);box-shadow:var(--raise);
+  padding:12px;z-index:70;
+}
+.mobile-menu a{display:block;padding:12px 16px;border-radius:14px;color:var(--ink-2);font-size:14.5px}
+.mobile-menu a:hover{box-shadow:var(--press-sm);color:var(--ink)}
+.mobile-menu.is-open{display:block}
+.hero{padding:64px 0 30px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);gap:64px;align-items:center}
+.hero h1{
+  font-size:clamp(32px,4.4vw,56px);
+  line-height:1.2;letter-spacing:-.03em;
+  margin-top:26px;
+}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lead{margin-top:22px;color:var(--ink-2);max-width:46ch;font-size:16px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
 
+.hero-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:42px}
+.fact{padding:16px 18px;border-radius:var(--r-sm);box-shadow:var(--press-sm);background:var(--bg)}
+.fact b{display:block;font-size:14.5px}
+.fact span{font-size:12.5px;color:var(--ink-3)}
+.dial-card{
+  background:var(--bg);border-radius:var(--r-lg);box-shadow:var(--raise);
+  padding:22px;position:relative;
+}
+.dial-well{
+  position:relative;aspect-ratio:1;border-radius:50%;
+  box-shadow:var(--press);overflow:hidden;
+  background:radial-gradient(circle at 30% 26%, #eef2f8 0%, var(--bg) 58%, #dcE2EC 100%);
+}
+.sweep{
+  position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 0deg,
+    rgba(47,109,246,0) 0deg, rgba(47,109,246,.13) 48deg, rgba(47,109,246,0) 88deg);
+  animation:spin 7.5s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.rings{position:absolute;inset:0;width:100%;height:100%}
+.rings .node-dot{animation:pulse 3.6s ease-in-out infinite}
+.rings .node-dot:nth-child(2){animation-delay:.6s}
+.rings .node-dot:nth-child(3){animation-delay:1.2s}
+.rings .node-dot:nth-child(4){animation-delay:1.8s}
+.rings .node-dot:nth-child(5){animation-delay:2.4s}
+.rings .node-dot:nth-child(6){animation-delay:3s}
+@keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}
+.hub{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:140px;height:140px;border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:var(--bg);box-shadow:var(--raise-sm);
+  text-align:center;
+}
+.hub b{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums}
+.hub span{font-size:12px;color:var(--ink-3);margin-top:4px}
+
+.dial-foot{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.dial-foot .cell{padding:13px 16px;border-radius:14px;box-shadow:var(--press-sm);background:var(--bg)}
+.dial-foot .cell span{display:block;font-size:11.5px;color:var(--ink-3)}
+.dial-foot .cell b{font-size:16px;font-variant-numeric:tabular-nums}
+.demo-tag{
+  position:absolute;top:14px;right:16px;font-size:11px;color:var(--ink-3);
+  padding:4px 10px;border-radius:999px;box-shadow:var(--press-sm);background:var(--bg);
+}
+.cap-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.cap{padding:32px}
+.cap-ico{
+  width:56px;height:56px;border-radius:16px;display:grid;place-items:center;
+  box-shadow:var(--press-sm);background:var(--bg);color:var(--accent);margin-bottom:20px;
+}
+.cap-ico svg{width:26px;height:26px}
+.cap h3{font-size:19px}
+.cap p{margin-top:10px;color:var(--ink-2);font-size:14.5px}
+.cap .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{font-size:12px;color:var(--ink-2);padding:5px 12px;border-radius:999px;box-shadow:var(--press-sm);background:var(--bg)}
+.console{
+  display:grid;grid-template-columns:84px minmax(0,1fr);gap:22px;
+  padding:22px;border-radius:var(--r-lg);box-shadow:var(--raise);background:var(--bg);
+}
+.rail{
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  padding:14px 10px;border-radius:var(--r-md);box-shadow:var(--press);
+}
+.rail-logo{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;box-shadow:var(--raise-sm);background:var(--bg)}
+.rail-divider{height:1px;width:70%;background:var(--dark);opacity:.7;margin:4px 0}
+.rail-btn{
+  width:46px;height:46px;border:0;border-radius:14px;background:var(--bg);
+  box-shadow:var(--raise-sm);display:grid;place-items:center;cursor:pointer;color:var(--ink-3);
+  transition:box-shadow .25s,color .25s;
+}
+.rail-btn svg{width:19px;height:19px}
+.rail-btn:hover{color:var(--ink)}
+.rail-btn.is-on{box-shadow:var(--press-sm);color:var(--accent)}
+.rail-btn.is-off{cursor:default;color:var(--ink-3);opacity:.55;box-shadow:var(--raise-sm)}
+
+.dash-main{min-width:0}
+.dash-top{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.dash-top h3{font-size:19px}
+.dash-sub{font-size:12.5px;color:var(--ink-3);margin-top:2px}
+.tabs{display:flex;gap:6px;margin-left:auto;padding:5px;border-radius:999px;box-shadow:var(--press-sm);background:var(--bg)}
+.tab{
+  border:0;background:transparent;padding:7px 16px;border-radius:999px;
+  font-size:13px;color:var(--ink-2);cursor:pointer;transition:box-shadow .25s,color .25s;
+}
+.tab.is-on{background:var(--bg);box-shadow:var(--raise-sm);color:var(--ink);font-weight:600}
+.view{display:none}
+.view.is-active{display:block}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{padding:16px 17px;border-radius:var(--r-sm);box-shadow:var(--press-sm);background:var(--bg)}
+.kpi span{display:block;font-size:11.5px;color:var(--ink-3)}
+.kpi strong{display:block;font-size:23px;font-weight:800;letter-spacing:-.02em;line-height:1.35;font-variant-numeric:tabular-nums}
+.kpi strong em{font-style:normal;font-size:12px;font-weight:600;color:var(--ink-3);margin-left:2px}
+.kpi .delta{display:block;font-size:11.5px;margin-top:3px;color:var(--ink-3)}
+.kpi .delta.ok{color:var(--ok)}
+.kpi .delta.warn{color:var(--warn)}
+.dash-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px;margin-top:16px}
+.panel-card{padding:20px;border-radius:var(--r-md);box-shadow:var(--raise-sm);background:var(--bg);min-width:0}
+.panel-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.panel-head h4{font-size:14px;font-weight:600}
+.panel-head .meta{font-size:11.5px;color:var(--ink-3);margin-left:auto}
+.chart{width:100%;height:170px;display:block}
+.chart-axis{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-3);margin-top:8px;padding:0 2px}
+.dev-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;box-shadow:var(--press-sm);background:var(--bg);margin-bottom:9px}
+.dev-row:last-child{margin-bottom:0}
+.dev-name{font-size:13px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dev-proto{font-size:10.5px;color:var(--ink-3);padding:2px 8px;border-radius:999px;box-shadow:var(--press-sm)}
+.pill{font-size:11px;padding:3px 10px;border-radius:999px;margin-left:auto;flex:none}
+.pill.ok{color:var(--ok);box-shadow:var(--press-sm)}
+.pill.off{color:var(--ink-3);box-shadow:var(--press-sm)}
+.pill.warn{color:var(--warn);box-shadow:var(--press-sm)}
+.tbl{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13px}
+.tbl th{text-align:left;font-size:11.5px;font-weight:600;color:var(--ink-3);padding:0 12px 10px}
+.tbl td{padding:11px 12px;box-shadow:none;border-bottom:1px solid rgba(196,202,215,.55)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td:first-child, .tbl th:first-child{padding-left:2px}
+.alert-row{display:flex;gap:12px;padding:13px 15px;border-radius:14px;box-shadow:var(--press-sm);background:var(--bg);margin-bottom:10px;align-items:center}
+.alert-row:last-child{margin-bottom:0}
+.alert-row .lv{font-size:11px;padding:3px 9px;border-radius:999px;box-shadow:var(--press-sm);flex:none}
+.lv.high{color:#c9453f}
+.lv.mid{color:var(--warn)}
+.lv.low{color:var(--ink-3)}
+.alert-row .txt{font-size:13px;min-width:0}
+.alert-row .txt small{display:block;font-size:11px;color:var(--ink-3)}
+.alert-row .time{font-size:11.5px;color:var(--ink-3);margin-left:auto;flex:none}
+.proto-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.proto{
+  padding:13px 14px;border-radius:14px;background:var(--bg);box-shadow:var(--press-sm);
+  text-align:center;font-size:13px;color:var(--ink-2);transition:box-shadow .25s,color .25s,transform .25s;
+}
+.proto:hover{box-shadow:var(--raise-sm);color:var(--ink);transform:translateY(-2px)}
+.chain{display:grid;grid-template-columns:1fr 46px 1fr 46px 1fr 46px 1fr;align-items:center;margin-top:34px}
+.node{padding:22px 18px;border-radius:var(--r-md);box-shadow:var(--raise-sm);background:var(--bg);text-align:center}
+.node b{display:block;font-size:14px}
+.node span{display:block;font-size:11.5px;color:var(--ink-3);margin-top:4px;line-height:1.5}
+.link{position:relative;height:2px;margin:0 6px;background:var(--dark);border-radius:2px}
+.link::after{
+  content:"";position:absolute;top:50%;left:0;width:6px;height:6px;border-radius:50%;
+  background:var(--accent);transform:translate(0,-50%);
+  animation:flow 2.6s linear infinite;
+}
+@keyframes flow{0%{left:0;opacity:0}20%{opacity:1}80%{opacity:1}100%{left:100%;opacity:0}}
+.scene-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.scene{padding:30px;display:flex;gap:22px;align-items:flex-start}
+.scene-ico{width:64px;height:64px;border-radius:18px;flex:none;display:grid;place-items:center;box-shadow:var(--press-sm);color:var(--accent)}
+.scene-ico svg{width:30px;height:30px}
+.scene h3{font-size:17px}
+.scene p{margin-top:8px;font-size:14px;color:var(--ink-2)}
+.scene ul{margin:14px 0 0;padding-left:18px;font-size:13px;color:var(--ink-2)}
+.scene li{margin:4px 0}
+
+/* 分层架构 */
+.arch{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:48px;align-items:center}
+.arch-stack{display:flex;flex-direction:column;gap:14px;align-items:center}
+.layer{
+  width:var(--w,100%);background:var(--bg);border-radius:22px;box-shadow:var(--raise-sm);
+  padding:18px 22px;display:flex;align-items:center;gap:14px;
+  transition:box-shadow .3s,transform .3s;
+}
+.layer:hover{box-shadow:var(--raise);transform:translateY(-2px)}
+.layer b{font-size:14.5px;flex:none;min-width:74px}
+.layer .chips{display:flex;flex-wrap:wrap;gap:8px;margin-left:auto;justify-content:flex-end}
+.chip{font-size:12px;color:var(--ink-2);padding:5px 11px;border-radius:999px;box-shadow:var(--press-sm);background:var(--bg);white-space:nowrap}
+.stack-note{font-size:12px;color:var(--ink-3);text-align:center;margin-top:18px}
+.arch-points{margin-top:24px;display:grid;gap:12px}
+.arch-points p{display:flex;gap:12px;font-size:13.5px;color:var(--ink-2)}
+.arch-points i{flex:none;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:.78em;opacity:.7}
+
+/* 部署形态 */
+.deploy-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.deploy{padding:30px;display:flex;flex-direction:column}
+.deploy-tag{align-self:flex-start;font-size:11px;color:var(--accent);padding:4px 11px;border-radius:999px;box-shadow:var(--press-sm);margin-bottom:16px}
+.deploy h3{font-size:17px}
+.deploy .desc{margin-top:10px;font-size:13.5px;color:var(--ink-2);flex:1}
+.checks{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:10px}
+.checks li{position:relative;font-size:12.5px;color:var(--ink-2);padding-left:18px}
+.checks li::before{
+  content:"";position:absolute;left:0;top:.68em;width:6px;height:6px;border-radius:50%;
+  background:var(--accent);opacity:.4;
+}
+
+/* 实施路径 */
+.tl{max-width:840px;margin-inline:auto}
+.tl-row{display:grid;grid-template-columns:118px 46px minmax(0,1fr)}
+.tl-time{font-size:12.5px;color:var(--ink-3);text-align:right;padding-top:18px}
+.tl-axis{position:relative;display:flex;flex-direction:column;align-items:center}
+.tl-axis::before{
+  content:"";position:absolute;top:0;bottom:0;left:50%;width:2px;margin-left:-1px;
+  background:var(--dark);opacity:.75;
+}
+.tl-row:first-child .tl-axis::before{top:25px}
+.tl-row:last-child .tl-axis::before{bottom:auto;height:25px}
+.tl-dot{
+  width:13px;height:13px;border-radius:50%;margin-top:18px;position:relative;z-index:1;background:var(--bg);
+  box-shadow:4px 4px 9px var(--dark), -4px -4px 9px var(--light);
+}
+.tl-dot.is-now{box-shadow:0 0 0 2px var(--accent), 4px 4px 9px var(--dark)}
+.tl-body{padding:12px 0 30px 26px}
+.tl-body h3{font-size:16.5px}
+.tl-body p{margin-top:8px;font-size:13.5px;color:var(--ink-2);max-width:54ch}
+.tl-foot{margin:6px auto 0;max-width:840px;font-size:12px;color:var(--ink-3);text-align:center}
+
+.faq{display:grid;gap:14px;max-width:860px;margin-inline:auto}
+details.q{border-radius:var(--r-md);box-shadow:var(--raise-sm);background:var(--bg);overflow:hidden;transition:box-shadow .3s}
+details.q[open]{box-shadow:var(--press)}
+summary.q-head{
+  list-style:none;cursor:pointer;padding:20px 24px;
+  display:flex;align-items:center;gap:16px;font-weight:600;font-size:15px;
+}
+summary::-webkit-details-marker{display:none}
+summary::-webkit-details-marker{display:none}
+.q-plus{width:26px;height:26px;border-radius:50%;flex:none;margin-left:auto;display:grid;place-items:center;box-shadow:var(--raise-sm);transition:transform .3s}
+.q-plus::before,.q-plus::after{content:"";position:absolute;background:var(--ink-2);border-radius:1px}
+.q-plus{position:relative}
+.q-plus::before{width:11px;height:2px}
+.q-plus::after{width:2px;height:11px;transition:opacity .3s,transform .3s}
+details.q[open] .q-plus::after{opacity:0;transform:scaleY(.2)}
+details.q[open] .q-plus{box-shadow:var(--press-sm)}
+.q-body{padding:0 24px 24px;color:var(--ink-2);font-size:14px;max-width:640px}
+.cta{padding:64px 48px;border-radius:var(--r-lg);box-shadow:var(--raise);background:var(--bg);text-align:center}
+.cta h2{font-size:clamp(24px,3vw,34px);line-height:1.32}
+.cta p{margin-top:14px;color:var(--ink-2);max-width:52ch;margin-inline:auto}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+
+footer{padding:52px 0 40px;margin-top:24px}
+.foot-inner{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;padding-top:26px;border-top:1px solid rgba(196,202,215,.6)}
+.foot-note{font-size:12.5px;color:var(--ink-3);max-width:52ch}
+.foot-links{display:flex;gap:20px;font-size:13px;color:var(--ink-2)}
+.foot-links a:hover{color:var(--accent)}
+@media (max-width:1100px){
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .menu-btn{display:grid;place-items:center}
+}
+@media (max-width:980px){
+  .hero-grid{grid-template-columns:1fr;gap:44px}
+  .proto-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .dash-grid{grid-template-columns:1fr}
+  .chain{grid-template-columns:1fr;gap:0}
+  .link{height:34px;width:2px;margin:0 auto;background:var(--dark)}
+  .link::after{animation:none;left:50%;top:0;transform:translate(-50%,0)}
+  .scene-grid,.cap-grid{grid-template-columns:1fr}
+  .scene{flex-direction:column;gap:16px}
+  .arch{grid-template-columns:1fr;gap:38px}
+  .deploy-grid{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .section{padding:66px 0}
+  .hero{padding:40px 0 12px}
+  .console{grid-template-columns:1fr;padding:16px}
+  .rail{flex-direction:row;justify-content:center;flex-wrap:wrap}
+  .rail-divider{display:none}
+  .hero-facts{grid-template-columns:1fr}
+  .proto-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kpis{grid-template-columns:1fr 1fr}
+  .hub{width:118px;height:118px}
+  .hub b{font-size:25px}
+  .cta{padding:44px 22px}
+  .card,.cap,.scene,.deploy{padding:24px}
+  .layer{width:100%;padding:13px 14px;flex-wrap:wrap;gap:8px}
+  .layer .chips{width:100%;justify-content:flex-start;margin-left:0}
+  .tl-row{grid-template-columns:86px 32px minmax(0,1fr)}
+  .tl-body{padding-left:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
+<div class="nav-wrap">
+  <div class="wrap">
+    <nav class="nav" aria-label="主导航">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 7 L12 18 L19 7" stroke="#2f6df6" stroke-width="3" stroke-linejoin="round" fill="none"/></svg>
+        </span>
+        <span class="brand-word"><b>VangIoT</b><span>万联互联</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#capability">产品能力</a>
+        <a href="#arch">架构</a>
+        <a href="#console">控制台</a>
+        <a href="#protocol">协议接入</a>
+        <a href="#deploy">部署</a>
+        <a href="#scene">应用场景</a>
+        <a href="#faq">常见问题</a>
+      </div>
+      <a class="btn nav-cta" href="#console">控制台预览</a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="展开菜单">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#5b6580" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg>
+      </button>
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#capability">产品能力</a>
+        <a href="#arch">分层架构</a>
+        <a href="#console">控制台</a>
+        <a href="#protocol">协议接入</a>
+        <a href="#deploy">部署形态</a>
+        <a href="#scene">应用场景</a>
+        <a href="#path">实施路径</a>
+        <a href="#faq">常见问题</a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="kicker"><i></i>VangIoT · 万联互联</p>
+      <h1>万物互联<br>应当像<em>触摸</em>一样直观</h1>
+      <p class="lead">
+        VangIoT 万联互联是一套面向工业与农业现场的物联网软件平台。
+        设备接入、边缘采集、规则联动与数据看板，收敛在同一块面板里；
+        不再需要为每个厂家、每种协议各开一套系统。
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="#console">打开控制台预览</a>
+        <a class="btn btn-quiet btn-lg" href="#protocol">看接入方式</a>
+      </div>
+      <div class="hero-facts">
+        <div class="fact"><b>多协议接入</b><span>标准协议直连，私有协议按模板解析</span></div>
+        <div class="fact"><b>边缘侧计算</b><span>过滤、聚合、断网缓存都在网关上完成</span></div>
+        <div class="fact"><b>私有化部署</b><span>公有云、本地服务器或单台网关三种形态</span></div>
+        <div class="fact"><b>开放接口</b><span>REST API 与消息订阅，便于嵌入业务系统</span></div>
+      </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+
+    <div class="dial-card">
+      <span class="demo-tag">模拟数据</span>
+      <div class="dial-well">
+        <div class="sweep"></div>
+        <svg class="rings" viewBox="0 0 400 400" role="img" aria-label="设备连接拓扑示意图">
+          <circle cx="200" cy="200" r="170" fill="none" stroke="#ffffff" stroke-width="3"/>
+          <circle cx="200" cy="200" r="165" fill="none" stroke="#c4cad7" stroke-width="1.1" opacity=".9"/>
+          <g stroke="#c4cad7" stroke-width="1.1" opacity=".65">
+            <line x1="200" y1="200" x2="200" y2="34"/>
+            <line x1="200" y1="200" x2="344" y2="117"/>
+            <line x1="200" y1="200" x2="344" y2="283"/>
+            <line x1="200" y1="200" x2="200" y2="366"/>
+            <line x1="200" y1="200" x2="56" y2="283"/>
+            <line x1="200" y1="200" x2="56" y2="117"/>
+          </g>
+          <g>
+            <circle cx="200" cy="34" r="12" fill="#e4e9f2" stroke="#ffffff" stroke-width="2"/>
+            <circle class="node-dot" cx="200" cy="34" r="5" fill="#2f6df6"/>
+            <circle cx="344" cy="117" r="12" fill="#e4e9f2" stroke="#ffffff" stroke-width="2"/>
+            <circle class="node-dot" cx="344" cy="117" r="5" fill="#2f6df6"/>
+            <circle cx="344" cy="283" r="12" fill="#e4e9f2" stroke="#ffffff" stroke-width="2"/>
+            <circle class="node-dot" cx="344" cy="283" r="5" fill="#2f6df6"/>
+            <circle cx="200" cy="366" r="12" fill="#e4e9f2" stroke="#ffffff" stroke-width="2"/>
+            <circle class="node-dot" cx="200" cy="366" r="5" fill="#2f6df6"/>
+            <circle cx="56" cy="283" r="12" fill="#e4e9f2" stroke="#ffffff" stroke-width="2"/>
+            <circle class="node-dot" cx="56" cy="283" r="5" fill="#2f6df6"/>
+            <circle cx="56" cy="117" r="12" fill="#e4e9f2" stroke="#ffffff" stroke-width="2"/>
+            <circle class="node-dot" cx="56" cy="117" r="5" fill="#2f6df6"/>
+          </g>
+        </svg>
+        <div class="hub"><b id="hubCount">1,284</b><span>在线设备</span></div>
+      </div>
+      <div class="dial-foot">
+        <div class="cell"><span>消息吞吐</span><b id="hubRate">36.2k / 秒</b></div>
+        <div class="cell"><span>平均时延</span><b>42 ms</b></div>
       </div>
     </div>
   </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/08/18/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2025-08-18T11:25:51.048Z" itemprop="datePublished">2025-08-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/08/18/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/08/18/hello-world/" data-id="cmeh16da90000j0va0gx7djmd" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
 </section>
-        
-          <aside id="sidebar">
-  
-    
 
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/08/">August 2025</a></li></ul>
+<!-- ===== 产品能力 ===== -->
+<section class="section" id="capability">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker"><i></i>产品能力</p>
+      <h2>从一根线接入，到一张图决策</h2>
+      <p class="sub">四件事按现场顺序排好：先纳管，再采集，然后让数据自己触发动作，最后落到人看得懂的界面上。</p>
+    </div>
+    <div class="cap-grid">
+      <article class="card cap">
+        <div class="cap-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01M11 7h4M11 17h4"/></svg>
+        </div>
+        <h3>设备接入与建模</h3>
+        <p>把不同厂家的表计、PLC、传感器登记成统一的设备模型：一份型号定义管点位，一份分组管理现场。接入一台和接入一千台，是同一套操作。</p>
+        <div class="tags"><span class="tag">设备台账</span><span class="tag">点位映射</span><span class="tag">批量导入</span></div>
+      </article>
+      <article class="card cap">
+        <div class="cap-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/><circle cx="12" cy="12" r="3"/><path d="M7 7l2.5 2.5M14.5 14.5L17 17M17 7l-2.5 2.5M9.5 14.5L7 17"/></svg>
+        </div>
+        <h3>边缘采集</h3>
+        <p>采集策略下沉到网关：按周期轮询、变化上报、异常补传。链路中断时数据先落本地，恢复后按序回补，不让关键点位出现空洞。</p>
+        <div class="tags"><span class="tag">周期轮询</span><span class="tag">断点续传</span><span class="tag">数据清洗</span></div>
+      </article>
+      <article class="card cap">
+        <div class="cap-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h7l3 6h6"/><path d="M4 18h7l3-6"/><circle cx="4" cy="6" r="1.6"/><circle cx="4" cy="18" r="1.6"/><circle cx="20" cy="12" r="1.6"/></svg>
+        </div>
+        <h3>规则与联动</h3>
+        <p>用「条件—动作」描述业务：点位超限、设备离线、累计量越界，都能触发通知、工单或反向下发控制。规则可预览、可停用、可回溯触发记录。</p>
+        <div class="tags"><span class="tag">阈值告警</span><span class="tag">多条件组合</span><span class="tag">反向下发</span></div>
+      </article>
+      <article class="card cap">
+        <div class="cap-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 19V9M9 19V5M14 19v-6M19 19v-9"/><path d="M3 21h18"/></svg>
+        </div>
+        <h3>数据与看板</h3>
+        <p>时序数据统一落库，按设备、分组、时间切片出图。看板支持曲线、累计、对比与地图位置，也能以整块面板的形式嵌进既有业务系统。</p>
+        <div class="tags"><span class="tag">时序存储</span><span class="tag">自定义看板</span><span class="tag">导出报表</span></div>
+      </article>
     </div>
   </div>
+</section>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/08/18/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
+<!-- ===== 分层架构 ===== -->
+<section class="section" id="arch">
+  <div class="wrap arch">
+    <div class="section-head" style="margin-bottom:0">
+      <p class="kicker"><i></i>分层架构</p>
+      <h2>采集、治理、应用，各归各层</h2>
+      <p class="sub">平台按四层切开：换协议只动接入层，换业务只动应用层，中间的数据模型与规则不用跟着改。</p>
+      <div class="arch-points">
+        <p><i></i><span>边缘层可以按站点拆开部署，一台网关就能独立承担一个现场。</span></p>
+        <p><i></i><span>平台层不绑定具体协议，接入层新增协议不影响已有的设备模型。</span></p>
+        <p><i></i><span>应用层只读平台层的接口，换前端界面不必回头改采集逻辑。</span></p>
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+
+    <div>
+      <div class="arch-stack">
+        <div class="layer" style="--w:72%">
+          <b>应用层</b>
+          <div class="chips"><span class="chip">看板</span><span class="chip">报表</span><span class="chip">小程序</span><span class="chip">开放 API</span></div>
+        </div>
+        <div class="layer" style="--w:83%">
+          <b>平台层</b>
+          <div class="chips"><span class="chip">设备模型</span><span class="chip">时序存储</span><span class="chip">规则引擎</span><span class="chip">权限</span></div>
+        </div>
+        <div class="layer" style="--w:92%">
+          <b>边缘层</b>
+          <div class="chips"><span class="chip">采集调度</span><span class="chip">本地缓存</span><span class="chip">协议转换</span></div>
+        </div>
+        <div class="layer" style="--w:100%">
+          <b>设备层</b>
+          <div class="chips"><span class="chip">传感器</span><span class="chip">表计</span><span class="chip">PLC</span><span class="chip">采集网关</span></div>
+        </div>
+      </div>
+      <p class="stack-note">层与层之间只走两类接口：点位数据上行，控制指令下行</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 控制台预览 ===== -->
+<section class="section" id="console">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker"><i></i>控制台预览</p>
+      <h2>一块面板，看清整张网的现在</h2>
+      <p class="sub">下面是控制台的结构示意，用于说明信息的排布方式；其中的数值与告警均为模拟数据，可切换标签查看不同视图。</p>
+    </div>
+
+    <div class="console">
+      <aside class="rail">
+        <span class="rail-logo" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M5 7 L12 18 L19 7" stroke="#2f6df6" stroke-width="3" stroke-linejoin="round" fill="none"/></svg>
+        </span>
+        <div class="rail-divider"></div>
+        <button class="rail-btn is-on" data-tab="overview" title="总览" aria-label="总览视图">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>
+        </button>
+        <button class="rail-btn" data-tab="devices" title="设备" aria-label="设备视图">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="4" width="16" height="10" rx="2"/><path d="M8 18h8M12 14v4"/><path d="M8 9h.01M11 9h5"/></svg>
+        </button>
+        <button class="rail-btn" data-tab="alerts" title="告警" aria-label="告警视图">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3l9 16h-18z"/><path d="M12 9v4M12 16h.01"/></svg>
+        </button>
+        <span class="rail-divider"></span>
+        <span class="rail-btn is-off" title="示例占位" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>
+        </span>
+      </aside>
+
+      <div class="dash-main">
+        <div class="dash-top">
+          <div>
+            <h3 id="dashTitle">总览</h3>
+            <p class="dash-sub">示例厂区 · 2026-11-18 · 模拟数据</p>
+          </div>
+          <div class="tabs" role="tablist" aria-label="控制台视图切换">
+            <button class="tab is-on" role="tab" data-tab="overview" aria-selected="true">总览</button>
+            <button class="tab" role="tab" data-tab="devices" aria-selected="false">设备</button>
+            <button class="tab" role="tab" data-tab="alerts" aria-selected="false">告警</button>
+          </div>
+        </div>
+
+        <!-- 视图：总览 -->
+        <div class="view is-active" id="view-overview" role="tabpanel">
+          <div class="kpis">
+            <div class="kpi">
+              <span>在线设备</span>
+              <strong id="kpiOnline">1,284</strong>
+              <span class="delta ok">在线率 98.6%</span>
+            </div>
+            <div class="kpi">
+              <span>今日消息</span>
+              <strong id="kpiMsg">2.86<em>亿</em></strong>
+              <span class="delta">上行 + 下行合计</span>
+            </div>
+            <div class="kpi">
+              <span>未处理告警</span>
+              <strong>7</strong>
+              <span class="delta warn">较昨日减少 3 条</span>
+            </div>
+            <div class="kpi">
+              <span>平均时延</span>
+              <strong>42<em>ms</em></strong>
+              <span class="delta">近 5 分钟窗口</span>
+            </div>
+          </div>
+
+          <div class="dash-grid">
+            <div class="panel-card">
+              <div class="panel-head">
+                <h4>消息量走势</h4>
+                <span class="meta">对比昨日</span>
+              </div>
+              <svg class="chart" viewBox="0 0 640 170" preserveAspectRatio="none" role="img" aria-label="近 24 小时消息量曲线示意">
+                <defs>
+                  <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#2f6df6" stop-opacity=".16"/>
+                    <stop offset="100%" stop-color="#2f6df6" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <g stroke="#c4cad7" stroke-width="1" opacity=".55">
+                  <line x1="0" y1="42" x2="640" y2="42" vector-effect="non-scaling-stroke"/>
+                  <line x1="0" y1="86" x2="640" y2="86" vector-effect="non-scaling-stroke"/>
+                  <line x1="0" y1="130" x2="640" y2="130" vector-effect="non-scaling-stroke"/>
+                </g>
+                <path d="M0 150 L0 122 L80 106 L160 134 L240 88 L320 100 L400 60 L480 78 L560 42 L640 56 L640 150 Z"
+                      fill="url(#areaGrad)"/>
+                <path d="M0 122 L80 106 L160 134 L240 88 L320 100 L400 60 L480 78 L560 42 L640 56"
+                      fill="none" stroke="#2f6df6" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+                <path d="M0 138 L80 132 L160 140 L240 118 L320 126 L400 104 L480 112 L560 92 L640 100"
+                      fill="none" stroke="#2f6df6" stroke-width="1.4" stroke-dasharray="6 5" opacity=".35" vector-effect="non-scaling-stroke"/>
+              </svg>
+              <div class="chart-axis">
+                <span>00:00</span><span>04:00</span><span>08:00</span><span>12:00</span><span>16:00</span><span>20:00</span><span>24:00</span>
+              </div>
+            </div>
+
+            <div class="panel-card">
+              <div class="panel-head">
+                <h4>设备动态</h4>
+                <span class="meta">最近 10 分钟</span>
+              </div>
+              <div class="dev-row">
+                <span class="dev-name">1# 温室环境采集器</span>
+                <span class="dev-proto">MQTT</span>
+                <span class="pill ok">在线</span>
+              </div>
+              <div class="dev-row">
+                <span class="dev-name">3# 水肥一体机</span>
+                <span class="dev-proto">Modbus</span>
+                <span class="pill ok">在线</span>
+              </div>
+              <div class="dev-row">
+                <span class="dev-name">冷库温湿度节点 A</span>
+                <span class="dev-proto">LoRa</span>
+                <span class="pill ok">在线</span>
+              </div>
+              <div class="dev-row">
+                <span class="dev-name">2# 电表集中器</span>
+                <span class="dev-proto">DL/T 645</span>
+                <span class="pill off">离线</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 视图：设备 -->
+        <div class="view" id="view-devices" role="tabpanel">
+          <div class="panel-card">
+            <div class="panel-head">
+              <h4>设备台账</h4>
+              <span class="meta">共 1,302 台 · 显示前 6 台</span>
+            </div>
+            <table class="tbl">
+              <colgroup>
+                <col style="width:34%"><col style="width:18%"><col style="width:16%"><col style="width:18%"><col style="width:14%">
+              </colgroup>
+              <thead>
+                <tr><th>设备名称</th><th>协议</th><th>分组</th><th>最后上报</th><th>状态</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>1# 温室环境采集器</td><td>MQTT</td><td>一号棚</td><td>12 秒前</td><td>在线</td></tr>
+                <tr><td>3# 水肥一体机</td><td>Modbus TCP</td><td>一号棚</td><td>4 秒前</td><td>在线</td></tr>
+                <tr><td>冷库温湿度节点 A</td><td>LoRaWAN</td><td>冷库</td><td>38 秒前</td><td>在线</td></tr>
+                <tr><td>2# 电表集中器</td><td>DL/T 645</td><td>配电房</td><td>16 分钟前</td><td>离线</td></tr>
+                <tr><td>气象站（园区）</td><td>HTTP</td><td>户外</td><td>2 分钟前</td><td>在线</td></tr>
+                <tr><td>水泵控制器 B</td><td>OPC UA</td><td>泵房</td><td>7 秒前</td><td>在线</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 视图：告警 -->
+        <div class="view" id="view-alerts" role="tabpanel">
+          <div class="panel-card">
+            <div class="panel-head">
+              <h4>未处理告警</h4>
+              <span class="meta">按时间倒序</span>
+            </div>
+            <div class="alert-row">
+              <span class="lv high">高</span>
+              <span class="txt">2# 电表集中器离线已超 15 分钟<small>配电房 · 规则：设备离线</small></span>
+              <span class="time">14:22</span>
+            </div>
+            <div class="alert-row">
+              <span class="lv mid">中</span>
+              <span class="txt">冷库 B 温度 8.4 ℃，高于设定阈值 8 ℃<small>冷库 · 规则：点位越限</small></span>
+              <span class="time">13:07</span>
+            </div>
+            <div class="alert-row">
+              <span class="lv low">低</span>
+              <span class="txt">网关 GW-07 心跳间隔抖动<small>边缘节点 · 规则：链路质量</small></span>
+              <span class="time">09:41</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 协议与链路 ===== -->
+<section class="section" id="protocol">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker"><i></i>协议接入</p>
+      <h2>协议是入口，不该是门槛</h2>
+      <p class="sub">常用工业与物联网协议直接配置就能连；没有现成模板的厂家私有协议，用点位表和解析模板补上，不必为一种新设备改一次平台。</p>
+    </div>
+
+    <div class="proto-grid">
+      <span class="proto">MQTT</span>
+      <span class="proto">MQTT over TLS</span>
+      <span class="proto">Modbus TCP</span>
+      <span class="proto">Modbus RTU</span>
+      <span class="proto">OPC UA</span>
+      <span class="proto">HTTP / REST</span>
+      <span class="proto">WebSocket</span>
+      <span class="proto">CoAP</span>
+      <span class="proto">LoRaWAN</span>
+      <span class="proto">私有协议模板</span>
+    </div>
+
+    <div class="chain">
+      <div class="node"><b>现场设备</b><span>传感器 · 表计 · PLC</span></div>
+      <div class="link" aria-hidden="true"></div>
+      <div class="node"><b>边缘网关</b><span>采集 · 缓存 · 转发</span></div>
+      <div class="link" aria-hidden="true"></div>
+      <div class="node"><b>VangIoT 平台</b><span>存储 · 规则 · 看板</span></div>
+      <div class="link" aria-hidden="true"></div>
+      <div class="node"><b>业务应用</b><span>大屏 · 小程序 · 第三方</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 部署形态 ===== -->
+<section class="section" id="deploy">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker"><i></i>部署形态</p>
+      <h2>数据放在哪，决定怎么部署</h2>
+      <p class="sub">三种形态不是三个版本，而是同一套代码的三种落点；设备模型、规则语法与看板配置在形态之间可以直接带走。</p>
+    </div>
+
+    <div class="deploy-grid">
+      <article class="card deploy">
+        <span class="deploy-tag">起步常用</span>
+        <h3>公有云托管</h3>
+        <p class="desc">开通即用，不必自备服务器与运维人力。适合刚起步的试点，以及设备分散在多个站点、没人长期值守机房的情况。</p>
+        <ul class="checks">
+          <li>按设备数量配置资源，随规模弹性调整</li>
+          <li>升级、备份与证书由平台侧负责</li>
+          <li>数据出内网前需要先过一轮合规评估</li>
+        </ul>
+      </article>
+
+      <article class="card deploy">
+        <span class="deploy-tag">数据不出机房</span>
+        <h3>私有化部署</h3>
+        <p class="desc">整套服务部署在客户自己的服务器上，设备数据不经过公网。适合对数据边界有明确要求的生产环境与政企项目。</p>
+        <ul class="checks">
+          <li>一台 Linux 服务器即可起步，可做双机</li>
+          <li>提供离线安装包，内网环境也能安装升级</li>
+          <li>可与内网既有的业务系统、数据库直连</li>
+        </ul>
+      </article>
+
+      <article class="card deploy">
+        <span class="deploy-tag">现场独立运行</span>
+        <h3>边缘单机</h3>
+        <p class="desc">单台网关承载一个小规模现场，链路中断时采集与告警继续在本地跑，不必等中心恢复。</p>
+        <ul class="checks">
+          <li>千级点位以内的小现场足够用</li>
+          <li>本地看板与本地告警，不依赖云端</li>
+          <li>联网后按序把数据同步回中心平台</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 应用场景 ===== -->
+<section class="section" id="scene">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="kicker"><i></i>应用场景</p>
+      <h2>四个现场，同一套底座</h2>
+      <p class="sub">换场景时重叠的是接入、存储与联动逻辑，改的只是设备模型和看板布局。</p>
+    </div>
+
+    <div class="scene-grid">
+      <article class="card scene">
+        <div class="scene-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 21c4-3 6-6.5 6-10a6 6 0 1 0-12 0c0 3.5 2 7 6 10z"/><path d="M12 15V9"/></svg>
+        </div>
+        <div>
+          <h3>智慧农业</h3>
+          <p>温室、水肥、气象三类设备按棚分组，温湿度越限自动提醒，灌溉与通风按条件联动手动或自动执行。</p>
+          <ul><li>按棚、按批次追溯环境曲线</li><li>水肥机远程启停与用量累计</li></ul>
+        </div>
+      </article>
+
+      <article class="card scene">
+        <div class="scene-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3.4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M18 6l-2 2M8 16l-2 2"/></svg>
+        </div>
+        <div>
+          <h3>工业设备</h3>
+          <p>采集产线设备的运行状态、电流与节拍，统计开机率、停机时长与能耗，异常先由规则判定再派人。</p>
+          <ul><li>OEE 基础数据自动汇总</li><li>停机原因按规则归类</li></ul>
+        </div>
+      </article>
+
+      <article class="card scene">
+        <div class="scene-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>
+        </div>
+        <div>
+          <h3>能源计量</h3>
+          <p>电、水、气、热集中抄表，分项计量落到回路与班组，越限与突增在当天就推给责任人。</p>
+          <ul><li>分时用量与同期对比</li><li>抄表失败自动重试并留痕</li></ul>
+        </div>
+      </article>
+
+      <article class="card scene">
+        <div class="scene-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="3" width="10" height="18" rx="2"/><path d="M14 9h4a2 2 0 0 1 2 2v10"/><path d="M7 7h4M7 11h4M7 15h4"/></svg>
+        </div>
+        <div>
+          <h3>园区与楼宇</h3>
+          <p>空调、照明、水泵统一纳管，按楼层与时段分组排程；巡检异常可一键生成工单，回填后闭环。</p>
+          <ul><li>定时与联动两种控制方式</li><li>设备与工单双向追溯</li></ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 实施路径 ===== -->
+<section class="section" id="path">
+  <div class="wrap">
+    <div class="section-head is-center">
+      <p class="kicker"><i></i>实施路径</p>
+      <h2>从一台设备到一张网，分四步走</h2>
+      <p class="sub">每一步都能单独收口，不必等整套平台搭完才看到效果。</p>
+    </div>
+
+    <div class="tl">
+      <div class="tl-row">
+        <div class="tl-time">第 1 天</div>
+        <div class="tl-axis"><span class="tl-dot is-now"></span></div>
+        <div class="tl-body">
+          <h3>试点接入</h3>
+          <p>挑一台正在运行的设备，接上网关、登记点位，确认数据能稳定上行。链路与协议的问题在这一步暴露，代价最低。</p>
+        </div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-time">第 1 周</div>
+        <div class="tl-axis"><span class="tl-dot"></span></div>
+        <div class="tl-body">
+          <h3>模型与看板</h3>
+          <p>按型号整理点位定义与分组，先搭一屏现场看得懂的看板。把“看得见”做实，后面讨论告警和控制才有依据。</p>
+        </div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-time">第 2–3 周</div>
+        <div class="tl-axis"><span class="tl-dot"></span></div>
+        <div class="tl-body">
+          <h3>规则与联动</h3>
+          <p>把现场真正会发生的异常写成规则，配上通知与工单；再挑一到两条控制做联动，顺带验证下行链路。</p>
+        </div>
+      </div>
+
+      <div class="tl-row">
+        <div class="tl-time">持续</div>
+        <div class="tl-axis"><span class="tl-dot"></span></div>
+        <div class="tl-body">
+          <h3>复制与复盘</h3>
+          <p>按型号批量复制设备，按站点复制看板；每月复盘告警量、误报率与数据缺口，再决定下一步扩到哪个现场。</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="tl-foot">这是常见的实施节奏，实际周期取决于现场规模、设备厂家的配合度与网络条件。</p>
+  </div>
+</section>
+
+<!-- ===== 常见问题 ===== -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head is-center">
+      <p class="kicker"><i></i>常见问题</p>
+      <h2>上线前最常被问到的几件事</h2>
+    </div>
+
+    <div class="faq">
+      <details class="q" open>
+        <summary class="q-head">需要自己准备服务器吗？<span class="q-plus" aria-hidden="true"></span></summary>
+        <div class="q-body">三种形态可选：公有云托管、部署在客户内网的私有化实例，或以单台边缘网关承载小规模现场。选哪种取决于现场规模、是否需要与内网系统互访，以及数据能否出内网。</div>
+      </details>
+
+      <details class="q">
+        <summary class="q-head">厂家私有协议怎么接？<span class="q-plus" aria-hidden="true"></span></summary>
+        <div class="q-body">先用抓包与调试工具确认报文结构，再在平台里按点位表定义地址、类型与换算规则，生成解析模板。同一型号的设备复用同一份模板，后续新增设备只需填地址。</div>
+      </details>
+
+      <details class="q">
+        <summary class="q-head">数据能保存多久？<span class="q-plus" aria-hidden="true"></span></summary>
+        <div class="q-body">按点位与采样频率分别配置保留策略：关键点位长期留存，高频过程量做降采样归档。也可以对接客户已有的时序库或对象存储，平台只负责采集与查询编排。</div>
+      </details>
+
+      <details class="q">
+        <summary class="q-head">能和现有系统打通吗？<span class="q-plus" aria-hidden="true"></span></summary>
+        <div class="q-body">开放 REST API 与消息订阅（MQTT / WebSocket），设备状态、点位数据和告警事件都能推给第三方系统；反向控制同样走接口，权限按设备分组划分。</div>
+      </details>
+
+      <details class="q">
+        <summary class="q-head">现场断网了会怎样？<span class="q-plus" aria-hidden="true"></span></summary>
+        <div class="q-body">采集与缓存留在网关侧，链路恢复后按时间顺序补传；平台会标注数据缺口的时间段，看板与报表不会把缺口当成零值来算。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta">
+      <h2>先接一台设备，<br>再决定要不要接一千台。</h2>
+      <p>用现场已经跑着的一台表计或传感器做试点，一天之内就能走完接入、采集、规则和看板的完整链路。</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary btn-lg" href="#console">看控制台怎么用</a>
+        <a class="btn btn-quiet btn-lg" href="#faq">先看常见问题</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 7 L12 18 L19 7" stroke="#2f6df6" stroke-width="3" stroke-linejoin="round" fill="none"/></svg>
+        </span>
+        <div class="foot-note">
+          VangIoT 万联互联 · 物联网软件平台<br>
+          © 2026 VangIoT。联系我们:hlbejy@126.com。
+        </div>
+      </div>
+      <div class="foot-links">
+        <a href="#capability">产品能力</a>
+        <a href="#arch">分层架构</a>
+        <a href="#console">控制台</a>
+        <a href="#protocol">协议接入</a>
+        <a href="#deploy">部署形态</a>
+        <a href="#scene">应用场景</a>
+        <a href="#path">实施路径</a>
+      </div>
     </div>
   </div>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
+<script>
+(function(){
+  "use strict";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---- 移动端菜单 ---- */
+  var menuBtn = document.getElementById("menuBtn");
+  var menu = document.getElementById("mobileMenu");
+  if (menuBtn && menu) {
+    menuBtn.addEventListener("click", function(){
+      var open = menu.classList.toggle("is-open");
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    menu.addEventListener("click", function(e){
+      if (e.target.closest("a")) {
+        menu.classList.remove("is-open");
+        menuBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+  /* ---- 控制台视图切换（标签与左侧图标联动） ---- */
+  var titles = { overview: "总览", devices: "设备", alerts: "告警" };
+  var dashTitle = document.getElementById("dashTitle");
+  var tabs = Array.prototype.slice.call(document.querySelectorAll("[data-tab]"));
 
+  function switchTab(name){
+    if (!titles[name]) return;
+    tabs.forEach(function(el){
+      if (el.classList.contains("tab")) {
+        var on = el.getAttribute("data-tab") === name;
+        el.classList.toggle("is-on", on);
+        el.setAttribute("aria-selected", on ? "true" : "false");
+      } else if (el.classList.contains("rail-btn") && el.tagName === "BUTTON") {
+        el.classList.toggle("is-on", el.getAttribute("data-tab") === name);
+      }
+    });
+    ["overview","devices","alerts"].forEach(function(v){
+      var view = document.getElementById("view-" + v);
+      if (view) view.classList.toggle("is-active", v === name);
+    });
+    if (dashTitle) dashTitle.textContent = titles[name];
+  }
 
+  tabs.forEach(function(el){
+    if (el.tagName === "BUTTON") {
+      el.addEventListener("click", function(){ switchTab(el.getAttribute("data-tab")); });
+    }
+  });
 
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+  /* ---- 模拟数据轻微跳动 ---- */
+  var online = 1284;
+  var rate = 36.2;
+  var kpiOnline = document.getElementById("kpiOnline");
+  var hubCount = document.getElementById("hubCount");
+  var hubRate = document.getElementById("hubRate");
 
+  function fmt(n){ return n.toLocaleString("zh-CN"); }
+  function tick(){
+    online += Math.floor(Math.random() * 9) - 4;
+    if (online < 1260) online = 1260;
+    if (online > 1300) online = 1300;
+    rate = Math.round((rate + (Math.random() * 1.6 - 0.8)) * 10) / 10;
+    if (rate < 28) rate = 28;
+    if (rate > 46) rate = 46;
+    if (kpiOnline) kpiOnline.textContent = fmt(online);
+    if (hubCount) hubCount.textContent = fmt(online);
+    if (hubRate) hubRate.textContent = rate.toFixed(1) + "k / 秒";
+  }
+  if (!reduced) setInterval(tick, 2600);
 
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
+  /* ---- 当前所在区块高亮导航 ---- */
+  var sections = ["capability","arch","console","protocol","deploy","scene","path","faq"];
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav-links a"));
+  if ("IntersectionObserver" in window && navLinks.length) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (!en.isIntersecting) return;
+        navLinks.forEach(function(a){
+          a.classList.toggle("is-current", a.getAttribute("href") === "#" + en.target.id);
+        });
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    sections.forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+  }
+})();
+</script>
 </body>
 </html>
