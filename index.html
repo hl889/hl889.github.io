@@ -47,7 +47,7 @@ a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:12px}
 .wrap{width:min(1180px,calc(100% - 44px));margin-inline:auto}
-#capability,#arch,#console,#protocol,#deploy,#scene,#path,#faq{scroll-margin-top:96px}
+#capability,#arch,#console,#shots,#protocol,#deploy,#scene,#path,#faq{scroll-margin-top:96px}
 .section{padding:80px 0}
 .section-head{max-width:640px;margin-bottom:44px}
 .section-head.is-center{text-align:center;margin-inline:auto}
@@ -386,6 +386,21 @@ footer{padding:52px 0 40px;margin-top:24px}
 }
 /* 动态背景画布 */
 #bgCanvas{position:fixed;inset:0;z-index:-1;width:100%;height:100%;pointer-events:none}
+/* ===== 真实界面截图 ===== */
+.shot-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.shot{display:block;border:0;padding:14px;border-radius:var(--r-md);background:var(--bg);box-shadow:var(--raise);cursor:zoom-in;text-align:left;width:100%;transition:box-shadow .28s,transform .28s}
+.shot:hover{box-shadow:var(--raise-sm);transform:translateY(2px)}
+.shot .frame{display:block;border-radius:14px;overflow:hidden;box-shadow:var(--press-sm);aspect-ratio:1.87/1;background:var(--bg)}
+.shot .frame img{width:100%;height:100%;object-fit:cover;object-position:top left}
+.shot figcaption{margin-top:12px;font-size:13px;color:var(--ink-2);padding-inline:6px}
+.shot.wide{grid-column:span 2}
+.lb{position:fixed;inset:0;z-index:100;display:none;background:rgba(37,44,64,.72);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:36px;cursor:zoom-out}
+.lb.is-open{display:flex}
+.lb .box{max-width:1280px;width:100%;background:var(--bg);border-radius:var(--r-md);box-shadow:var(--raise);padding:16px;cursor:default}
+.lb .box img{border-radius:14px;width:100%;max-height:78vh;object-fit:contain}
+.lb .cap{padding:14px 10px 4px;font-size:14px;color:var(--ink-2);display:flex;justify-content:space-between;align-items:center;gap:16px}
+.lb .close{border:0;width:38px;height:38px;border-radius:50%;background:var(--bg);box-shadow:var(--raise-sm);cursor:pointer;font-size:16px;color:var(--ink-2)}
+@media (max-width:720px){.shot-grid{grid-template-columns:1fr}.shot.wide{grid-column:auto}}
 </style>
 </head>
 <body>
@@ -403,6 +418,7 @@ footer{padding:52px 0 40px;margin-top:24px}
         <a href="#capability">产品能力</a>
         <a href="#arch">架构</a>
         <a href="#console">控制台</a>
+        <a href="#shots">真实界面</a>
         <a href="#protocol">协议接入</a>
         <a href="#deploy">部署</a>
         <a href="#scene">应用场景</a>
@@ -416,6 +432,7 @@ footer{padding:52px 0 40px;margin-top:24px}
         <a href="#capability">产品能力</a>
         <a href="#arch">分层架构</a>
         <a href="#console">控制台</a>
+        <a href="#shots">真实界面</a>
         <a href="#protocol">协议接入</a>
         <a href="#deploy">部署形态</a>
         <a href="#scene">应用场景</a>
@@ -756,6 +773,59 @@ footer{padding:52px 0 40px;margin-top:24px}
   </div>
 </section>
 
+<!-- ===== 真实界面 ===== -->
+<section class="section" id="shots">
+  <div class="wrap">
+    <div class="section-head is-center">
+      <p class="kicker"><i></i>真实界面</p>
+      <h2>不是概念图，是正在运行的产品</h2>
+      <p class="sub">以下截图全部来自生产环境（小良农庄 · 396 亩园区），点击任意截图查看大图。</p>
+    </div>
+    <div class="shot-grid">
+      <button class="shot wide" data-full="assets/shot-01-command-center.png" data-cap="智慧农业指挥中心：园区三维全景、设备台账、环境实况与告警一屏统览">
+        <span class="frame"><img src="assets/shot-01-command-center.png" alt="智慧农业指挥中心大屏" loading="lazy"></span>
+        <figcaption>指挥中心大屏 · 三维全景 / 环境实况 / 告警联动</figcaption>
+      </button>
+      <button class="shot wide" data-full="assets/shot-06-monitor-wall.png" data-cap="监控大屏：89 路摄像头画面矩阵，78 路在线，支持轮巡与全屏切换">
+        <span class="frame"><img src="assets/shot-06-monitor-wall.png" alt="监控大屏多路视频矩阵" loading="lazy"></span>
+        <figcaption>监控大屏 · 89 路视频矩阵与轮巡</figcaption>
+      </button>
+      <button class="shot" data-full="assets/shot-03-greenhouse-monitor.png" data-cap="大棚总览：实时视频联动设备控制，卷帘/通风/浇水正反转直达">
+        <span class="frame"><img src="assets/shot-03-greenhouse-monitor.png" alt="大棚视频监控与控制" loading="lazy"></span>
+        <figcaption>大棚总览 · 实时视频与设备控制</figcaption>
+      </button>
+      <button class="shot" data-full="assets/shot-09-remote-control.png" data-cap="远程控制：控制箱操作台，指令真实下发，厂家状态与现场结果分别记录">
+        <span class="frame"><img src="assets/shot-09-remote-control.png" alt="远程设备控制台" loading="lazy"></span>
+        <figcaption>远程控制 · 指令真实下发</figcaption>
+      </button>
+      <button class="shot" data-full="assets/shot-04-device-ledger.png" data-cap="设备台账：资产编号、厂家 SN、接入核对与在线检查">
+        <span class="frame"><img src="assets/shot-04-device-ledger.png" alt="设备台账列表" loading="lazy"></span>
+        <figcaption>设备台账 · SN 校验与接入核对</figcaption>
+      </button>
+      <button class="shot" data-full="assets/shot-05-device-type.png" data-cap="设备类型：业务分类 → 型号参数 → 连接验证，三步接入新厂商设备">
+        <span class="frame"><img src="assets/shot-05-device-type.png" alt="设备类型管理" loading="lazy"></span>
+        <figcaption>设备类型 · 三步接入新厂商设备</figcaption>
+      </button>
+      <button class="shot" data-full="assets/shot-07-camera-manage.png" data-cap="摄像头台账：89 路 NVR 通道，品牌型号、取流状态一屏管理">
+        <span class="frame"><img src="assets/shot-07-camera-manage.png" alt="摄像头台账" loading="lazy"></span>
+        <figcaption>摄像头台账 · 89 路通道管理</figcaption>
+      </button>
+      <button class="shot" data-full="assets/shot-08-video-playback.png" data-cap="视频回放：按摄像头与日期检索录像，随时回看现场">
+        <span class="frame"><img src="assets/shot-08-video-playback.png" alt="视频回放界面" loading="lazy"></span>
+        <figcaption>视频回放 · 按日期检索录像</figcaption>
+      </button>
+      <button class="shot" data-full="assets/shot-02-park-manage.png" data-cap="园区管理：园区与基地档案，地理坐标与联系人维护">
+        <span class="frame"><img src="assets/shot-02-park-manage.png" alt="园区管理弹窗" loading="lazy"></span>
+        <figcaption>园区管理 · 基地档案与坐标</figcaption>
+      </button>
+      <button class="shot" data-full="assets/shot-10-system-config.png" data-cap="全局配置：上传限制、接口参数与扩展名白名单集中治理">
+        <span class="frame"><img src="assets/shot-10-system-config.png" alt="全局配置界面" loading="lazy"></span>
+        <figcaption>全局配置 · 参数集中治理</figcaption>
+      </button>
+    </div>
+  </div>
+</section>
+
 <!-- ===== 协议与链路 ===== -->
 <section class="section" id="protocol">
   <div class="wrap">
@@ -1013,6 +1083,7 @@ footer{padding:52px 0 40px;margin-top:24px}
         <a href="#capability">产品能力</a>
         <a href="#arch">分层架构</a>
         <a href="#console">控制台</a>
+        <a href="#shots">真实界面</a>
         <a href="#protocol">协议接入</a>
         <a href="#deploy">部署形态</a>
         <a href="#scene">应用场景</a>
@@ -1110,6 +1181,25 @@ footer{padding:52px 0 40px;margin-top:24px}
       if (el) io.observe(el);
     });
   }
+})();
+</script>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="截图预览">
+  <div class="box">
+    <img id="lbImg" src="" alt="界面截图大图">
+    <div class="cap"><span id="lbCap"></span><button class="close" id="lbClose" aria-label="关闭">✕</button></div>
+  </div>
+</div>
+<script>
+(function(){
+  const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbCap=document.getElementById('lbCap');
+  document.querySelectorAll('.shot').forEach(s=>s.addEventListener('click',()=>{
+    lbImg.src=s.dataset.full;lbImg.alt=s.dataset.cap;lbCap.textContent=s.dataset.cap;
+    lb.classList.add('is-open');document.body.style.overflow='hidden';
+  }));
+  function closeLb(){lb.classList.remove('is-open');document.body.style.overflow='';}
+  lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
+  document.getElementById('lbClose').addEventListener('click',closeLb);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});
 })();
 </script>
 <script src="assets/bg.js"></script>
